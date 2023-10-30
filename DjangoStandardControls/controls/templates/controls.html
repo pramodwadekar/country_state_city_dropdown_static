@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <td>Country</td>
+                    <td> : </td>
+                    <td>
+                        <select id="country" onchange="CountryChange()">
+                            <option selected>Choose Country</option>
+                            {% for i in country %}
+                                <option value="{{i.id}}" {% if request.GET.country == i.id|lower %}selected{% endif %}>{{i.country_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td> : </td>
+                    <td>
+                        <select id="state" onchange="StateChange()">
+                            <option selected>Choose State</option>
+                            {% for i in state %}
+                                <option value="{{i.id}}" {% if request.GET.state == i.id|lower %}selected{% endif %}>{{i.state_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td> : </td>
+                    <td>
+                        <select id="city">
+                            <option selected>Choose City</option>
+                            {% for i in city %}
+                                <option value="{{i.id}}">{{i.city_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            function CountryChange(){
+                country_id = document.getElementById('country').value;
+                window.location = "/?country=" + country_id;
+            }
+            function StateChange(){
+               state_id = document.getElementById('state').value;
+               window.location = "/?country=" + '{{request.GET.country}}' + "&state=" + state_id;
+            }
+        </script>
+    </body>
+</html>
